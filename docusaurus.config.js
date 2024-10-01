@@ -18,6 +18,9 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/elasticstack-notes/",
 
+  // Add trailingSlash configuration
+  trailingSlash: false,
+
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "kotran222", // Usually your GitHub org/user name.
