@@ -22,7 +22,7 @@ DELETE /pages
   - First line specifies the HTTP verb and endpoint
   - Following lines specify the JSON request body
 
-```
+```SQL
 PUT /products
 {
     "settings": {
@@ -37,7 +37,7 @@ PUT /products
 - Index a document using POST request
 - **products index example**:
 
-```
+```SQL
 POST /products/_doc
 {
     "name": "Coffee Maker",
@@ -58,7 +58,7 @@ PUT /products/_doc/100
 
 - Retrieve Toaster example at id 100
 
-```
+```SQL
 GET /products/_doc/100
 ```
 
@@ -66,7 +66,7 @@ GET /products/_doc/100
 
 - Updating Toaster example at id 100 to have less count down to 3 in stock
 
-```
+```SQL
 POST /products/_update/100
 {
     "doc": {
@@ -78,7 +78,7 @@ POST /products/_update/100
 - Adding New Fields
 - Adding electronics field to Toaster Example
 
-```
+```SQL
 POST /products/_update/100
 {
     "doc": {
@@ -110,7 +110,7 @@ POST /products/_update/100
   - `in_stock` field is the custom count of items created earlier
   - `--` decrements and `++` increments
 
-```
+```SQL
 POST /products/_update/100
 {
     "script": {
@@ -121,7 +121,7 @@ POST /products/_update/100
 
 - **Scripting to assign a new count for Toaster example**:
 
-```
+```SQL
 POST /products/_update/100
 {
     "script": {
@@ -133,7 +133,7 @@ POST /products/_update/100
 - Could pass in parameters
 - **Scripting to account for parameters making changes to count for Toaster example**:
 
-```
+```SQL
 POST /products/_update/100
 {
     "script": {
@@ -149,7 +149,7 @@ POST /products/_update/100
   - add an if clause to check if stock is zero. Cannot decrement when 0.
   - if the if clause is met, then no changes are applied to the document and the "result" key is set to `noop`
 
-```
+```SQL
 POST /products/_update/100
 {
     "script": {
@@ -166,7 +166,7 @@ POST /products/_update/100
 
 - Similarly, could change to this logic that does the same thing:
 
-```
+```SQL
 POST /products/_update/100
 {
     "script": {
@@ -197,7 +197,7 @@ If it is important to detect if nothing was changed go with the new logic.
   - If you run the query again, the "result" key contains a value `updated`.
     - The `in_stock` value will increase to `6`.
 
-```
+```SQL
 POST /products/_update/101
 {
     "script": {
@@ -218,7 +218,7 @@ POST /products/_update/101
   - Replace the document to show a Toaster with a price of 79.
     - The query will also give a document without the additional tag fields.
 
-```
+```SQL
 PUT /products/_doc/100
 {
     "name": "Toaster",
@@ -231,7 +231,7 @@ PUT /products/_doc/100
 
 - Delete document at id 101
 
-```
+```SQL
 DELETE /products/_doc/101
 ```
 
@@ -308,7 +308,7 @@ FORMULA:
 - Default type of versioning is called **internal versioning**.
 - **External Versioning**: used when versions are maintained outside of Elasticsearch.
   - e.g. when documents are also stored in a database
-    ```
+    ```SQL
     PUT /products/_doc/123?version=521&version_type=external
     {
         "name": "Coffee Maker",
@@ -329,7 +329,7 @@ FORMULA:
   - If Primary term and sequence term matches what's currently there, then success response, else error response.
   - Elasticserach will reject a write operation if it contains the wrong primary term or sequence number
 
-```
+```SQL
 POST /products/_update/100?if_primary_term=X&if_seq_no=X
 {
     "doc": {
@@ -349,7 +349,7 @@ POST /products/_update/100?if_primary_term=X&if_seq_no=X
 
 - `"conflicts": "proceed"` will prevent the query from being aborted when there is a version conflict.
 
-```
+```SQL
 POST /products/_update_by_query
 {
   "conflicts": "proceed",
@@ -384,7 +384,7 @@ POST /products/_update_by_query
   - Query will delete all documents that match the query
   - `match_all` is empty hence it deletes all document
 
-```
+```SQL
 POST /products/_delete_by_query
 {
   "query": {
@@ -411,7 +411,7 @@ optional_source\n
 - In the Kibana console, let's index a new document
   - `"_id"` is optional
 
-```
+```SQL
 POST /_bulk
 { "index": { "_index": "products", "_id": 200} }
 { "name": "Expresso Machine", "price": 199,, "in_stock": 5 }
@@ -425,7 +425,7 @@ The code above will create two new products
 
 :::
 
-```
+```SQL
 POST /products/_bulk
 { "update": { "_id": 201 } }
 { "doc": { "price": 129 } }

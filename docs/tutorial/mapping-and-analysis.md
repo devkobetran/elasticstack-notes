@@ -49,7 +49,7 @@ style C fill:grey,color:white,stroke:black;
 - Open up localhost Kibana Console
 - Compare this query:
 
-```
+```SQL
 POST /_analyze
 {
     "text": "1 random sentence     in the air, but then the... PUPPIES :0"
@@ -59,7 +59,7 @@ POST /_analyze
 
 to this query:
 
-```
+```SQL
 POST /_analyze
 {
     "text": "1 random sentence     in the air, but then the... PUPPIES :0"
@@ -135,7 +135,7 @@ An `analyzer` is broken up into three parts: `char_filter`, `tokenizer`, and `fi
 - `keyword` fields are used for exact matching, aggregations, and sorting
 - Example:
 
-```
+```SQL
 POST /_analyze
 {
     "text": "1 random sentence     in the air, but then the... PUPPIES :0"
@@ -154,7 +154,7 @@ The output will contain a single token with the text string completely untouched
   - e.g trying to index an object for a `text` field
 - Sometimes, providing the wrong data type is okay
 
-```
+```SQL
 PUT /coercion_test/_doc/1
 {
     "price": 7.4
@@ -216,7 +216,7 @@ For the third PUT, it fails because the string contained a letter `m` along with
 
 **Array Example**:
 
-```
+```SQL
 POST /_analyze
 {
     "text": ["Strings are simply", "merged together."],
@@ -240,7 +240,7 @@ Remember to use the `nested` data type for arrays of objects if you need to quer
 
 ## Adding explicit mappings
 
-```
+```SQL
 PUT /reviews
 {
     "mappings": {
@@ -262,7 +262,7 @@ PUT /reviews
 
 ## Retrieving Mappings
 
-```
+```SQL
 GET /reviews/_mapping
 
 GET /reviews/_mapping/field/content
@@ -272,7 +272,7 @@ GET /reviews/_mapping/field/author.email
 
 ## Using dot notation in field names
 
-```
+```SQL
 PUT /reviews
 {
     "mappings": {
@@ -291,7 +291,7 @@ PUT /reviews
 
 can be converted to dot notation:
 
-```
+```SQL
 PUT /reviews
 {
     "mappings": {
@@ -308,7 +308,7 @@ PUT /reviews
 
 - **`created_at` timestamp custom mapping Example**:
 
-```
+```SQL
 PUT /reviews/_mapping
 {
     "properties": {
@@ -377,7 +377,7 @@ Don't provide UNIX timestamps for default date fields
 
 Example:
 
-```
+```SQL
 PUT /sales
 {
   "mappings": {
@@ -398,7 +398,7 @@ PUT /sales
 
 Example:
 
-```
+```SQL
 PUT /sales
 {
   "mappings": {
@@ -414,7 +414,7 @@ PUT /sales
 
 Example of disabling coercion at the index field to not tediously add coercion to every field:
 
-```
+```SQL
 PUT /sales
 {
   "settings": {
@@ -461,7 +461,7 @@ The "amount" field overwrites the index level coerce value of `false`.
 
 Example:
 
-```
+```SQL
 PUT /sales
 {
   "mappings": {
@@ -485,7 +485,7 @@ PUT /sales
 
 Example:
 
-```
+```SQL
 PUT /products
 {
   "mappings": {
@@ -510,7 +510,7 @@ PUT /products
 
 Example:
 
-```
+```SQL
 PUT /server-metrics
 {
   "mappings": {
@@ -532,7 +532,7 @@ PUT /server-metrics
 - The replacement value must be of the same data type as the field
 - Does not affect the value stored within `__source`
 
-```
+```SQL
 PUT /sales
 {
   "mappings": {
@@ -557,7 +557,7 @@ PUT /sales
 
 Example:
 
-```
+```SQL
 PUT /sales
 {
   "mappings": {
@@ -603,7 +603,7 @@ PUT /sales
 
 - [Reindex API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html) moves documents from one index to another so that we don't have to
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -624,7 +624,7 @@ POST /_reindex
 - modify the `__source` value while reindexing
 - Can be handled at the application level
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -643,7 +643,7 @@ POST /_reindex
 
 ### Reindex documents matching a query
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -664,7 +664,7 @@ The above code specifies a query within the "source" parameter to only reindex d
 
 ### Reindex only positive reviews
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -694,7 +694,7 @@ POST /_reindex
 
 Example:
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -716,7 +716,7 @@ POST /_reindex
 
 ### Changing a field's name
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -736,7 +736,7 @@ POST /_reindex
 
 - Example: Ignore reviews with ratings below 4.0
 
-```
+```SQL
 POST /_reindex
 {
   "source": {
@@ -792,7 +792,7 @@ For `"noop"` value, the document will not be indexed into the destination index.
   - Aliases can be used within queries
   - Aliases are defined with a field mapping
 
-```
+```SQL
 POST /_reindex/_mapping
 {
   "properties": {
@@ -819,7 +819,7 @@ POST /_reindex/_mapping
 
 ## Multi-field mappings
 
-```
+```SQL
 PUT /multi_field_test
 {
   "mappings": {
@@ -854,7 +854,7 @@ PUT /multi_field_test
 
 ### Structure of index Templates
 
-```
+```SQL
 PUT /_index_template/my-index-template
 {
   "index_patterns": ["my-index-pattern*"],
@@ -891,7 +891,7 @@ PUT /_index_template/my-index-template
 
 ## Configuring dynamic mapping
 
-```
+```SQL
 PUT /people
 {
   "mappings": {
@@ -920,7 +920,7 @@ PUT /people
   - All fields must be mapped explicitly
   - Similar behavior as relational databases
 
-```
+```SQL
 PUT /people
 {
   "mappings": {
@@ -936,7 +936,7 @@ PUT /people
 
 ### Numeric Detection
 
-```
+```SQL
 PUT /computers
 {
   "mappings": {
@@ -951,7 +951,7 @@ When adding a doc, if the field values are string versions of numbers, dynamic m
 
 ## Dynamic Templates
 
-```
+```SQL
 PUT /dynamic_template_test
 {
   "mappings": {
@@ -1121,7 +1121,7 @@ The main example we will be looking at is:
 
 - Example:
 
-```
+```SQL
 PUT /analyzer_test
 {
   "settings": {
@@ -1145,7 +1145,7 @@ PUT /analyzer_test
 
 ## Adding Analyzers to existing indices
 
-```
+```SQL
 // Any attempt to search or index documents will be refused
 // while the index is in the closed state
 PUT /analyzer_test/_close
