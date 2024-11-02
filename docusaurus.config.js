@@ -13,7 +13,7 @@ const config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://kotran222.github.io/",
+  url: "https://devkobetran.github.io/",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/elasticstack-notes/",
@@ -23,7 +23,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "kotran222", // Usually your GitHub org/user name.
+  organizationName: "devkobetran", // Usually your GitHub org/user name.
   projectName: "elasticstack-notes", // Usually your repo name.
 
   onBrokenLinks: "throw",
@@ -51,7 +51,7 @@ const config = {
           sidebarPath: "./sidebars.js",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/kotran222/elasticstack-notes",
+          editUrl: "https://github.com/devkobetran/elasticstack-notes",
         },
         blog: {
           showReadingTime: true,
@@ -61,7 +61,7 @@ const config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/kotran222/elasticstack-notes",
+          editUrl: "https://github.com/devkobetran/elasticstack-notes",
           // Useful options to enforce blogging best practices
           onInlineTags: "warn",
           onInlineAuthors: "warn",
@@ -94,7 +94,7 @@ const config = {
           },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/kotran222/elasticstack-notes",
+            href: "https://github.com/devkobetran/elasticstack-notes",
             label: "GitHub",
             position: "right",
           },
@@ -121,7 +121,7 @@ const config = {
               },
               {
                 label: "GitHub",
-                href: "https://github.com/kotran222/elasticstack-notes",
+                href: "https://github.com/devkobetran/elasticstack-notes",
               },
             ],
           },
